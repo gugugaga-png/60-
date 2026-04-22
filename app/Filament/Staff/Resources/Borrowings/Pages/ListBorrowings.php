@@ -20,7 +20,8 @@ use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Placeholder;
 use Illuminate\Support\Carbon;
-
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 class ListBorrowings extends ListRecords
 {
     protected static string $resource = BorrowingResource::class;
@@ -30,6 +31,7 @@ class ListBorrowings extends ListRecords
         return [
             CreateAction::make()
                 ->visible(fn () => auth()->user()?->role === 'admin'),
+            ExportAction::make(),
         ];
     }
 

@@ -1,4 +1,5 @@
 <?php
+// app/Providers/Filament/MemberPanelProvider.php
 
 namespace App\Providers\Filament;
 
@@ -11,38 +12,35 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use App\Filament\Widgets\StatsOverview;
-use App\Filament\Widgets\BorrowedCategoryChart;
-use App\Filament\Widgets\ComparisonChart;
 
-class StaffPanelProvider extends PanelProvider
+class MemberPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->id('staff')
+            ->id('member')
             ->login()
-            ->path('staff')
+            ->registration() // Optional: allow registration
+            ->passwordReset() // Optional: allow password reset
+            ->emailVerification() // Optional: require email verification
+            ->path('member')
             ->colors([
-                'primary' => Color::Rose,
+                'primary' => Color::Blue,
             ])
-            ->discoverResources(in: app_path('Filament/Staff/Resources'), for: 'App\Filament\Staff\Resources')
-            ->discoverPages(in: app_path('Filament/Staff/Pages'), for: 'App\Filament\Staff\Pages')
+            ->discoverResources(in: app_path('Filament/Member/Resources'), for: 'App\Filament\Member\Resources')
+            ->discoverPages(in: app_path('Filament/Member/Pages'), for: 'App\Filament\Member\Pages')
             ->pages([
                 Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Staff/Widgets'), for: 'App\Filament\Staff\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Member/Widgets'), for: 'App\Filament\Member\Widgets')
             ->widgets([
-                StatsOverview::class,
-                BorrowedCategoryChart::class,
-                ComparisonChart::class,
+                \App\Filament\Member\Widgets\ItemCatalogWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -57,6 +55,10 @@ class StaffPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+            ])
+            ->navigationGroups([
+                'Catalog',
+                'My Borrowings',
             ]);
     }
 }

@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Filament\Resources\Items\Pages;
+namespace App\Filament\Member\Resources\Items\Pages;
 
-use App\Filament\Resources\Items\ItemResource;
+use App\Filament\Member\Resources\Items\ItemResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class ListItems extends ListRecords
 {
@@ -16,7 +14,6 @@ class ListItems extends ListRecords
     {
         return [
             CreateAction::make(),
-            ExportAction::make(),
         ];
     }
 }

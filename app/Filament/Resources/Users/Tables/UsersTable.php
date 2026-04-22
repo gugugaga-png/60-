@@ -7,12 +7,19 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 class UsersTable
 {
     public static function configure(Table $table): Table
     {
         return $table
+                ->headerActions([
+            ExportAction::make()
+        ])
+        ->bulkActions([
+            ExportBulkAction::make(),
+        ])
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),

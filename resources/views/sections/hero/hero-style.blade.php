@@ -43,6 +43,22 @@
     .stack-item[data-id="4"] {
         width: 160px;
     }
+
+     @keyframes ombang {
+        0% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-15px);
+        }
+        100% {
+            transform: translateY(0px);
+        }
+    }
+    
+    .animate-ombang {
+        animation: ombang 3s ease-in-out infinite;
+    }
     
     @media (min-width: 768px) {
         .stack-item[data-id="1"] {

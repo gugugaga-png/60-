@@ -7,9 +7,7 @@
 
     <title>@yield('title', 'My App')</title>
 
-    {{-- Vite (Tailwind v4 + JS) --}}
-        @vite('resources/css/app.css')
-
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     {{-- Alpine (kalau belum ada di app.js) --}}
     
 
@@ -17,7 +15,7 @@
     @stack('styles')
 </head>
 
-<body class="h-full bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-white antialiased">
+<body class="h-full text-gray-900 dark:bg-gray-950 dark:text-white antialiased">
 
     {{-- NAVBAR --}}
     @include('homepage.navbar')
@@ -32,7 +30,7 @@
     {{-- FOOTER (optional tapi bagus) --}}
     <footer class="border-t border-gray-200 dark:border-gray-800 py-6 mt-10">
         <div class="text-center text-sm text-gray-500">
-            © {{ date('Y') }} My App. All rights reserved.
+            © {{ date('Y') }} Lentera. Made with ❤️ by uar.
         </div>
     </footer>
 
