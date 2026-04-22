@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Filament\Pages\MemberDashboard;
 use App\Filament\Pages\MyBorrowings;
 
 class RedirectBorrower
@@ -13,7 +12,7 @@ class RedirectBorrower
     {
         if (auth()->check() && auth()->user()->isBorrower()) {
             $allowedPaths = [
-                'member-dashboard',
+            
                 'my-borrowings',
                 'livewire',
                 'api',

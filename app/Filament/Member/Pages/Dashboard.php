@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Pages;
+namespace App\Filament\Member\Pages;
 
 use App\Models\Item;
 use App\Models\Borrowing;
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 use BackedEnum;
 
-class MemberDashboard extends Page implements HasForms
+class Dashboard extends Page implements HasForms
 {
     use InteractsWithForms;
     
@@ -22,7 +22,7 @@ class MemberDashboard extends Page implements HasForms
     protected static ?int $navigationSort = -2;
     
     // ✅ Hapus keyword 'static' - ini NON-STATIC property
-    protected string $view = 'filament.pages.member-dashboard';
+    protected string $view = 'filament.member.pages.member-dashboard';
     
     public $items = [];
     public $borrowings = [];
