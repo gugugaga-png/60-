@@ -11,13 +11,5 @@ class Dashboard extends BaseDashboard
         return !auth()->user()?->isBorrower();
     }
 
-    public function mount(): void
-    {
-        if (auth()->user()?->isBorrower()) {
-            redirect()->to(MemberDashboard::getUrl())->send();
-            exit;
-        }
-
-        parent::mount();
-    }
+    
 }

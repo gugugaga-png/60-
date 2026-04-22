@@ -12,19 +12,20 @@ use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+Use UnitEnum;
 
 class ItemResource extends Resource
 {
     protected static ?string $model = Item::class;
-    
+
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-wrench-screwdriver';
-    
-    protected static ?string $navigationLabel = 'Data Items';
-    
+    protected static string | UnitEnum | null $navigationGroup = 'Utilities';
+    protected static ?string $navigationLabel = 'Items';
+
     protected static ?string $modelLabel = 'Item';
-    
+
     protected static ?string $pluralModelLabel = 'Items';
-    
+
     protected static ?int $navigationSort = 2;
 
     // Hanya Admin yang bisa lihat menu ini

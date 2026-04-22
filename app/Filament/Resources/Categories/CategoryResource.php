@@ -13,19 +13,14 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+Use UnitEnum;
 
 class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-
-    // Hanya Admin yang bisa lihat menu ini
-    public static function shouldRegisterNavigation(): bool
-    {
-        return auth()->user()?->isAdmin() ?? false;
-    }
-
+    protected static string | UnitEnum | null $navigationGroup = 'Utilities';
     public static function form(Schema $schema): Schema
     {
         return CategoryForm::configure($schema);
@@ -35,35 +30,20 @@ class CategoryResource extends Resource
     {
         return CategoriesTable::configure($table);
     }
-
+    public static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()?->isAdmin() ?? false;
+    }
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-
-    // Permission methods
-    public static function canViewAny(): bool
+     public static function canViewAny(): bool
     {
         return auth()->user()?->isAdmin() ?? false;
     }
-
-    public static function canCreate(): bool
-    {
-        return auth()->user()?->isAdmin() ?? false;
-    }
-
-    public static function canEdit($record): bool
-    {
-        return auth()->user()?->isAdmin() ?? false;
-    }
-
-    public static function canDelete($record): bool
-    {
-        return auth()->user()?->isAdmin() ?? false;
-    }
-
     public static function getPages(): array
     {
         return [

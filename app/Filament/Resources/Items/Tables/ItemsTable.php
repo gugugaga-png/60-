@@ -7,6 +7,7 @@ use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Actions\EditAction;
 
 class ItemsTable
 {
@@ -19,13 +20,7 @@ class ItemsTable
                     ->circular()
                     ->defaultImageUrl(fn () => 'https://ui-avatars.com/api/?name=ALT&background=random'),
 
-                TextColumn::make('code')
-                    ->label('Kode')
-                    ->searchable()
-                    ->sortable()
-                    ->copyable()
-                    ->badge()
-                    ->color('gray'),
+
 
                 TextColumn::make('name')
                     ->label('Nama Alat')
@@ -79,7 +74,9 @@ class ItemsTable
                     ->dateTime('d M Y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+
             ])
+
             ->filters([
                 SelectFilter::make('condition')
                     ->label('Kondisi')
@@ -92,6 +89,9 @@ class ItemsTable
                 SelectFilter::make('category_id')
                     ->label('Kategori')
                     ->options(Category::all()->pluck('name', 'id')),
+            ])
+            ->recordActions([
+                EditAction::make(),
             ]);
     }
 }

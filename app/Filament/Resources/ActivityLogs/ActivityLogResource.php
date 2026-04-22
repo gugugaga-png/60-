@@ -56,7 +56,7 @@ class ActivityLogResource extends Resource
 
     public static function canEdit($record): bool
     {
-        return false; // Activity log tidak bisa diedit
+        return true; // Activity log tidak bisa diedit
     }
 
     public static function canDelete($record): bool

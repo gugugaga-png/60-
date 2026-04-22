@@ -6,6 +6,7 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -17,48 +18,23 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use App\Filament\Pages\MemberDashboard;
-use App\Filament\Pages\Dashboard;
-use Filament\Support\Facades\FilamentView;
-use Illuminate\Support\Facades\Blade;
-use App\Filament\Pages\MyBorrowings;
-use App\Http\Middleware\OnlyAdmin;
 
-class AdminPanelProvider extends PanelProvider
+class StaffPanelProvider extends PanelProvider
 {
-    public function boot()
-{
-    // Mendaftarkan CSS kustom ke Filament
-    FilamentView::registerRenderHook(
-        'panels::head.done',
-        fn (): string => Blade::render("@vite('resources/css/app.css')"),
-    );
-}
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->default()
-            ->id('admin')
-            ->path('admin')
-           ->sidebarCollapsibleOnDesktop(true)
-
-
-            ->login()
+            ->id('staff')
+            ->path('staff')
             ->colors([
-                'primary' => Color::Indigo,
+                'primary' => Color::Rose,
             ])
-            ->homeUrl(fn () => auth()->user()?->isBorrower()
-    ? MemberDashboard::getUrl()
-    : Dashboard::getUrl()
-)
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
-            // discoverPages DIHAPUS
+            ->discoverResources(in: app_path('Filament/Staff/Resources'), for: 'App\Filament\Staff\Resources')
+            ->discoverPages(in: app_path('Filament/Staff/Pages'), for: 'App\Filament\Staff\Pages')
             ->pages([
                 Dashboard::class,
-                MemberDashboard::class,
-                 MyBorrowings::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Staff/Widgets'), for: 'App\Filament\Staff\Widgets')
             ->widgets([
                 AccountWidget::class,
                 FilamentInfoWidget::class,
@@ -73,11 +49,9 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-                OnlyAdmin::class, // tambahkan middleware khusus untuk admin
             ])
             ->authMiddleware([
                 Authenticate::class,
-    \App\Http\Middleware\RedirectBorrower::class, // tambahkan ini
             ]);
     }
 }

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\Resources\Borrowings;
+namespace App\Filament\Staff\Resources\Borrowings;
 
-use App\Filament\Resources\Borrowings\Pages\CreateBorrowing;
-use App\Filament\Resources\Borrowings\Pages\EditBorrowing;
-use App\Filament\Resources\Borrowings\Pages\ListBorrowings;
-use App\Filament\Resources\Borrowings\Schemas\BorrowingForm;
-use App\Filament\Resources\Borrowings\Tables\BorrowingsTable;
+use App\Filament\Staff\Resources\Borrowings\Pages\CreateBorrowing;
+use App\Filament\Staff\Resources\Borrowings\Pages\EditBorrowing;
+use App\Filament\Staff\Resources\Borrowings\Pages\ListBorrowings;
+use App\Filament\Staff\Resources\Borrowings\Schemas\BorrowingForm;
+use App\Filament\Staff\Resources\Borrowings\Tables\BorrowingsTable;
 use App\Models\Borrowing;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -14,6 +14,8 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 Use UnitEnum;
+
+
 class BorrowingResource extends Resource
 {
     protected static ?string $model = Borrowing::class;

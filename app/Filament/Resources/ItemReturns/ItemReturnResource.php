@@ -12,17 +12,18 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+Use UnitEnum;
 
 class ItemReturnResource extends Resource
 {
     protected static ?string $model = ItemReturn::class;
-
+    protected static string | UnitEnum | null $navigationGroup = 'Utilities';
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'id';
-    
+
     protected static ?string $navigationLabel = 'Item Returns';
-    
+
     protected static ?int $navigationSort = 6;
 
     // ✅ Staff dan Admin bisa lihat menu ini
