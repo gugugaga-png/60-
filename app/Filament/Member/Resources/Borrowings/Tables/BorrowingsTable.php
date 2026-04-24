@@ -28,7 +28,7 @@ class BorrowingsTable
                     ->date()
                     ->sortable(),
                 TextColumn::make('total_rental_cost')
-                    ->money()
+                    ->money('IDR', locale: 'id')
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge(),
@@ -45,7 +45,7 @@ class BorrowingsTable
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                // EditAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

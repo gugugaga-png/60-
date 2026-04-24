@@ -25,6 +25,18 @@ class CategoryResource extends Resource
     {
         return CategoryForm::configure($schema);
     }
+    public static function getGloballySearchableAttributes(): array
+        {
+            return [
+                'name',
+            ];
+        }
+    public static function getGlobalSearchResultTitle($record): string
+{
+    return $record->name;
+}
+
+
 
     public static function table(Table $table): Table
     {

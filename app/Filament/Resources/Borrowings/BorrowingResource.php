@@ -26,7 +26,25 @@ protected static string | UnitEnum | null $navigationGroup = 'Utilities';
     protected static ?string $navigationLabel = 'All Borrowings';
 
     protected static ?int $navigationSort = 2;
-
+    public static function getGloballySearchableAttributes(): array
+{
+    return [
+        'user.name',
+        'item.name',
+        'status',
+    ];
+}
+public static function getGlobalSearchResultTitle($record): string
+{
+    return $record->item->name;
+}
+public static function getGlobalSearchResultDetails($record): array
+{
+    return [
+        'User' => $record->user->name,
+        'Status' => $record->status,
+    ];
+}
     // Staff dan Admin bisa lihat menu ini
     public static function shouldRegisterNavigation(): bool
     {

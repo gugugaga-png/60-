@@ -33,7 +33,23 @@ class ItemResource extends Resource
     {
         return auth()->user()?->isAdmin() ?? false;
     }
-
+        public static function getGloballySearchableAttributes(): array
+        {
+            return [
+                'name',
+                'description',
+            ];
+        }
+        public static function getGlobalSearchResultTitle($record): string
+        {
+            return $record->name;
+        }
+        public static function getGlobalSearchResultDetails($record): array
+        {
+            return [
+                'Description' => $record->description,
+            ];
+        }
     public static function form(Schema $schema): Schema
     {
         return ItemForm::configure($schema);

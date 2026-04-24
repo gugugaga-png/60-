@@ -27,14 +27,14 @@
 <div class="flex flex-col gap-8">
 
     {{-- Hero Banner - Enhanced --}}
-    <div class="relative overflow-hidden rounded-2xl p-8 text-dark shadow-xl" 
+    <div class="relative overflow-hidden rounded-2xl p-8 text-dark shadow-xl"
          style="background: linear-gradient(135deg, rgb(var(--primary-700)) 0%, rgb(var(--primary-500)) 40%, rgb(var(--primary-400)) 100%)">
-        
+
         {{-- Decorative Elements --}}
         <div class="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-white opacity-[0.08] blur-3xl"></div>
         <div class="absolute -bottom-32 left-1/4 w-96 h-96 rounded-full bg-white opacity-[0.06] blur-3xl"></div>
         <div class="absolute top-1/2 right-1/3 w-48 h-48 rounded-full bg-white opacity-[0.04] blur-2xl"></div>
-        
+
         {{-- Animated Pattern --}}
         <svg class="absolute inset-0 w-full h-full opacity-5" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -45,38 +45,67 @@
             <rect width="100%" height="100%" fill="url(#grid)"/>
         </svg>
 
-        <div class="relative z-10">
-            <div class="flex items-center gap-3 mb-2">
-                <div class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center animate-float">
-                    <span class="text-2xl">👋</span>
-                </div>
-                <div>
-                    <h1 class="text-3xl font-bold tracking-tight">Welcome back, {{ auth()->user()->name }}!</h1>
-                    <p class="text-sm mt-1 opacity-90 font-medium">Manage your borrowings and explore available items below.</p>
-                </div>
-            </div>
+       <div class="relative z-10">
+    <div class="flex items-center gap-3 mb-2">
+        <div class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center animate-float">
+            {{-- Icon Welcome/User --}}
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+            </svg>
+        </div>
+        <div>
+            <h1 class="text-3xl font-bold tracking-tight">Welcome back, {{ auth()->user()->name }}!</h1>
+            <p class="text-sm mt-1 opacity-90 font-medium">Manage your borrowings and explore available items below.</p>
+        </div>
+    </div>
 
-            {{-- Stats Cards - Enhanced --}}
-            <div class="flex flex-wrap gap-4 mt-6">
-                @foreach([
-                    ['value' => $items->count(), 'label' => 'Available Items', 'icon' => '📦', 'color' => 'from-emerald-500/20 to-emerald-500/5'],
-                    ['value' => $borrowings->where('status','approved')->count(), 'label' => 'Active Borrowings', 'icon' => '📚', 'color' => 'from-blue-500/20 to-blue-500/5'],
-                    ['value' => $borrowings->where('status','pending')->count(), 'label' => 'Pending Requests', 'icon' => '⏳', 'color' => 'from-amber-500/20 to-amber-500/5'],
-                    ['value' => $borrowings->where('status','returned')->count(), 'label' => 'Returned Items', 'icon' => '✅', 'color' => 'from-purple-500/20 to-purple-500/5'],
-                ] as $index => $stat)
-                <div class="relative group">
-                    <div class="absolute inset-0 bg-gradient-to-br {{ $stat['color'] }} rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div class="relative bg-white/15 backdrop-blur-md rounded-2xl px-6 py-4 min-w-[110px] border border-white/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="text-xl">{{ $stat['icon'] }}</span>
-                            <div class="text-2xl font-bold leading-none">{{ $stat['value'] }}</div>
-                        </div>
-                        <div class="text-xs font-semibold uppercase tracking-wider opacity-90">{{ $stat['label'] }}</div>
+    {{-- Stats Cards - Enhanced --}}
+    <div class="flex flex-wrap gap-4 mt-6">
+        @php
+            $stats = [
+                [
+                    'value' => $items->count(),
+                    'label' => 'Available Items',
+                    'color' => 'from-emerald-500/20 to-emerald-500/5',
+                    'icon' => '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-emerald-400"><path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" /></svg>'
+                ],
+                [
+                    'value' => $borrowings->where('status','approved')->count(),
+                    'label' => 'Active Borrowings',
+                    'color' => 'from-blue-500/20 to-blue-500/5',
+                    'icon' => '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-400"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" /></svg>'
+                ],
+                [
+                    'value' => $borrowings->where('status','pending')->count(),
+                    'label' => 'Pending Requests',
+                    'color' => 'from-amber-500/20 to-amber-500/5',
+                    'icon' => '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-amber-400"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>'
+                ],
+                [
+                    'value' => $borrowings->where('status','returned')->count(),
+                    'label' => 'Returned Items',
+                    'color' => 'from-purple-500/20 to-purple-500/5',
+                    'icon' => '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-purple-400"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>'
+                ],
+            ];
+        @endphp
+
+        @foreach($stats as $stat)
+        <div class="relative group">
+            <div class="absolute inset-0 bg-gradient-to-br {{ $stat['color'] }} rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div class="relative bg-white/15 backdrop-blur-md rounded-2xl px-6 py-4 min-w-[110px] border border-white/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="p-2 bg-white/10 rounded-lg">
+                        {!! $stat['icon'] !!}
                     </div>
+                    <div class="text-2xl font-bold leading-none text-white">{{ $stat['value'] }}</div>
                 </div>
-                @endforeach
+                <div class="text-xs font-semibold uppercase tracking-wider text-white/80">{{ $stat['label'] }}</div>
             </div>
         </div>
+        @endforeach
+    </div>
+</div>
     </div>
 
     {{-- Main Grid - Enhanced Spacing --}}
@@ -103,8 +132,8 @@
                     {{-- Condition Badge - Enhanced --}}
                     @if($item->condition)
                     <span class="absolute top-3 left-3 z-10 text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full shadow-md backdrop-blur-sm
-                        {{ $item->condition === 'good' ? 'bg-green-500/90 text-white' : ($item->condition === 'damaged' ? 'bg-red-500/90 text-white' : 'bg-yellow-500/90 text-white') }}">
-                        {{ match($item->condition) { 'good'=>'✨ Good','damaged'=>'⚠️ Damaged','maintenance'=>'🔧 Maintenance',default=>$item->condition } }}
+                        {{ $item->condition === 'good' ? 'bg-green-700/90 text-white' : ($item->condition === 'damaged' ? 'bg-red-500/90 text-white' : 'bg-yellow-500/90 text-white') }}">
+                        {{ match($item->condition) { 'good'=>'Good','damaged'=>'Damaged','maintenance'=>'Maintenance',default=>$item->condition } }}
                     </span>
                     @endif
 
@@ -120,7 +149,7 @@
                                 </svg>
                             </div>
                         @endif
-                        
+
                         {{-- Gradient Overlay --}}
                         <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
@@ -131,11 +160,11 @@
                             {{ $item->code }}
                         </span>
                         @endif
-                        
+
                         <p class="font-bold text-base text-gray-900 dark:text-gray-100 leading-tight mb-1 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                             {{ $item->name }}
                         </p>
-                        
+
                         <p class="text-xs text-gray-500 dark:text-gray-400 mb-3 flex items-center gap-1">
                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
@@ -161,10 +190,10 @@
                             onclick="selectItem({{ $item->id }}, '{{ addslashes($item->name) }}', {{ $item->daily_rental_price }}, {{ $item->available_stock }}, '{{ $item->code ?? '' }}')"
                             class="btn-select-{{ $item->id }} group/btn relative w-full py-2.5 px-4 text-sm font-semibold rounded-xl transition-all duration-300 overflow-hidden"
                             style="background: linear-gradient(135deg, rgb(var(--primary-500)) 0%, rgb(var(--primary-600)) 100%);">
-                            
+
                             {{-- Button Shine Effect --}}
                             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>
-                            
+
                             <span class="relative flex items-center justify-center gap-2 text-gray-800 dark:text-white group-hover/btn:text-blue-500 transition-colors duration-300">
     <svg class="w-4 h-4 transition-all duration-300 group-hover/btn:rotate-90 stroke-current" fill="none" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
@@ -285,8 +314,8 @@
                         </div>
                         @endif
 
-                        <button type="submit" 
-                                class="w-full py-3 text-sm font-bold rounded-xl text-white transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl"
+                        <button type="submit"
+                                class="w-full py-3 text-sm font-bold rounded-xl text-dark transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl"
                                 style="background: linear-gradient(135deg, rgb(var(--primary-600)) 0%, rgb(var(--primary-700)) 100%);">
                             <span class="flex items-center justify-center gap-2">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -346,7 +375,7 @@
                         </div>
                         @endif
 
-                        <button type="submit" 
+                        <button type="submit"
                                 class="w-full py-3 text-sm font-bold rounded-xl text-white bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl">
                             <span class="flex items-center justify-center gap-2">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -385,7 +414,7 @@
                                         {{ $borrowing->item->name }}
                                     </p>
                                 </div>
-                                
+
                                 <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
                                     @if($borrowing->item->code)
                                     <span class="font-mono font-semibold bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded-md text-gray-700 dark:text-gray-300">
@@ -461,7 +490,7 @@ function selectItem(itemId, itemName, dailyPrice, maxStock, itemCode) {
 
     document.querySelectorAll('[class*="btn-select-"]').forEach(b => b.innerText = 'Select to Borrow');
     const btn = document.querySelector('.btn-select-' + itemId);
-    if (btn) { 
+    if (btn) {
         const span = btn.querySelector('span span') || btn.querySelector('span');
         if (span) span.innerText = 'Selected';
         btn.style.background = 'linear-gradient(135deg, rgb(var(--primary-700)) 0%, rgb(var(--primary-800)) 100%)';

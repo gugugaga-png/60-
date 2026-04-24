@@ -36,7 +36,10 @@ class BorrowingResource extends Resource
             //
         ];
     }
-
+    public static function canEdit($record): bool
+{
+    return false;
+}
     public static function getPages(): array
     {
         return [

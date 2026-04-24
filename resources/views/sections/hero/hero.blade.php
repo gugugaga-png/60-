@@ -1,21 +1,23 @@
 <div class=" text-white min-h-screen flex flex-col items-center container mx-auto flex max-w-6xl flex-col items-center justify-center pt-10">
-    
-    <div class="text-center max-w-4xl mx-auto mb-12"> 
+
+    <div class="text-center max-w-4xl mx-auto mb-12">
         <h1 class="text-6xl md:text-8xl font-bold tracking-tight mb-6">
             Where Ideas Ignite.
         </h1>
         <p class="text-xl md:text-2xl text-gray-400 mb-10">
             Modern tools for everyone
         </p>
-        
-        <button class="bg-[#6333FF] hover:bg-[#5228D9] text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300">
-            Get Started Now!
-        </button>
+
+      <a href="{{ route('filament.member.auth.login') }}" class="inline-block">
+    <button class="bg-[#6333FF] hover:bg-[#5228D9] text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300">
+        Get Started Now!
+    </button>
+</a>
     </div>
-    
+
     <div class="w-full py-10 mx-auto">
         <div class="relative bg-[#9966FF] rounded-[40px] w-full min-h-[650px] shadow-2xl overflow-hidden">
-        
+
             <div class="absolute top-8 left-8 z-10 w-[280px] md:w-[500px] opacity-90">
                 <div class="rounded-xl border border-white/30 bg-white/10 backdrop-blur-md shadow-lg overflow-hidden">
 
@@ -46,13 +48,13 @@
             </div>
 
             <div class="absolute inset-0 flex items-end justify-center z-30 pointer-events-none">
-                <div class="relative flex items-end justify-center w-full max-w-6xl gap-4"> 
+                <div class="relative flex items-end justify-center w-full max-w-6xl gap-4">
                     <!-- Cat Image with animation -->
-                    <img id="catImage" src="{{ asset('images/cat.svg') }}" alt="Cat" 
+                    <img id="catImage" src="{{ asset('images/cat.svg') }}" alt="Cat"
                          class="w-[25rem] md:w-[30rem] h-auto transform translate-y-4 z-40 transition-opacity duration-500">
-                    
+
                     <!-- Dino Image with animation -->
-                    <img id="dinoImage" src="{{ asset('images/dino.svg') }}" alt="Dino" 
+                    <img id="dinoImage" src="{{ asset('images/dino.svg') }}" alt="Dino"
                          class="w-[25rem] md:w-[30rem] h-auto transform translate-y-4 z-30 transition-opacity duration-500">
                 </div>
             </div>
@@ -65,20 +67,20 @@
                 </div>
             </div>
 
-   
+
             <div class="absolute bottom-8 right-8 z-50 flex flex-col items-end" id="svgStack">
-               
+
             </div>
         </div>
     </div>
     <div class="w-full max-w-6xl mx-auto py-24 px-4">
     <div class="relative border border-white/30 rounded-[30px] p-10 md:p-16 flex flex-col md:flex-row items-center justify-between overflow-visible">
-        
+
         <div class="max-w-xl">
             <h2 class="text-5xl font-bold mb-6">
                 <span class="relative inline-block">
                     Join Us!
-                    
+
                 </span>
             </h2>
             <p class="text-gray-400 text-lg leading-relaxed">
@@ -87,29 +89,29 @@
         </div>
 
         <div class="hidden md:block relative w-[200px] md:w-[367px] h-[120px] md:h-[150px]">
-            <img 
-                src="{{ asset('images/sit-cat.png') }}" 
+            <img
+                src="{{ asset('images/sit-cat.png') }}"
                 alt="Sitting Cat"
                 class="absolute bottom-0 right-0 w-full h-auto translate-y-63"
             >
         </div>
 
     </div>
-</div>  
+</div>
 <div class="w-full max-w-6xl mx-auto py-24 px-4">
- 
+
 
    <div class="w-full max-w-6xl mx-auto py-24 px-4">
 
     <!-- Container dengan positioning relative untuk bento grid melengkung -->
     <div class="relative min-h-[650px] md:min-h-[750px]">
-        
+
         <!-- Bento Grid - 4 Steps dengan posisi absolute membentuk setengah lingkaran (kubah) -->
          <!-- How It Works Section -->
     <div class="w-full max-w-6xl mx-auto py-16 md:py-24 px-4">
         <div class="text-center mb-8 md:mb-12">
             <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
-                Simple & Sigma.
+                Simple & Fast.
             </h2>
             <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">
                 Empat langkah mudah menuju pengalaman meminjam yang paling mewing.
@@ -204,8 +206,8 @@
 
             <!-- Mobile Dino -->
             <div class="flex justify-center pt-6">
-                <img 
-                    src="{{ asset('images/dino-cartoon.png') }}" 
+                <img
+                    src="{{ asset('images/dino-cartoon.png') }}"
                     alt="Flying Dino"
                     class="w-[250px] h-auto animate-ombang"
                 >
@@ -214,9 +216,9 @@
 
         <!-- Desktop Layout - Bento Grid Melengkung -->
         <div class="hidden md:block relative min-h-[650px] lg:min-h-[750px]">
-            
+
             <div class="absolute inset-0">
-                
+
                 <!-- Step 1 -->
                 <div class="absolute left-0 lg:left-[2%] top-[30%] lg:top-[35%] w-[250px] lg:w-[280px] z-20">
                     <div class="relative overflow-hidden rounded-[30px] border border-white/30 bg-white/5 backdrop-blur-sm p-6 lg:p-7 group hover:bg-white/10 transition-all duration-300 shadow-xl">
@@ -309,8 +311,8 @@
 
             <!-- Desktop Dino -->
             <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-10">
-                <img 
-                    src="{{ asset('images/dino-cartoon.png') }}" 
+                <img
+                    src="{{ asset('images/dino-cartoon.png') }}"
                     alt="Flying Dino"
                     class="w-[380px] lg:w-[600px] h-auto animate-ombang"
                 >
@@ -324,7 +326,7 @@
     </div>
 
         <!-- Dino di tengah bawah dengan animasi ombang smooth -->
-    
+
 
     </div>
     <div class="w-full max-w-6xl mx-auto pt-64 px-4">
@@ -335,10 +337,11 @@
         <p class="text-xl md:text-2xl text-gray-400 mt-4 mb-10">
             All the tools you need, right at your fingertips.
         </p>
-        
-        <button class="bg-[#6333FF] hover:bg-[#5228D9] text-white px-10 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg shadow-[#6333FF]/30 hover:shadow-xl hover:shadow-[#6333FF]/40 transform hover:-translate-y-1">
-            Get Started!
-        </button>
+
+        <a href="{{ route('filament.member.auth.login') }}"
+   class="inline-block bg-[#6333FF] hover:bg-[#5228D9] text-white px-10 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg shadow-[#6333FF]/30 hover:shadow-xl hover:shadow-[#6333FF]/40 transform hover:-translate-y-1 cursor-pointer">
+    Get Started!
+</a>
     </div>
 </div>
 

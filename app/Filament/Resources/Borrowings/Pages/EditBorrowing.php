@@ -9,7 +9,7 @@ use Filament\Resources\Pages\EditRecord;
 class EditBorrowing extends EditRecord
 {
     protected static string $resource = BorrowingResource::class;
-
+    
     protected function getHeaderActions(): array
     {
         return [

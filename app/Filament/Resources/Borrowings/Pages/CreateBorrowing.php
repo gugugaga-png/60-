@@ -8,4 +8,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateBorrowing extends CreateRecord
 {
     protected static string $resource = BorrowingResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return BorrowingResource::getUrl('index');
+    }
 }

@@ -10,7 +10,6 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets\AccountWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -18,6 +17,8 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Filament\Member\Pages\Dashboard;
+use App\Http\Middleware\OnlyMember;
+
 class MemberPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -28,10 +29,17 @@ class MemberPanelProvider extends PanelProvider
             ->registration() // Optional: allow registration
             ->passwordReset() // Optional: allow password reset
             ->emailVerification() // Optional: require email verification
-            ->path('member')
+            ->topNavigation()
+->sidebarCollapsibleOnDesktop(false)
+->sidebarFullyCollapsibleOnDesktop(false)
+->renderHook(
+    'panels::body.start',
+    fn () => view('filament.hide-sidebar')
+)
             ->colors([
-                'primary' => Color::Blue,
-            ])
+                'primary' => Color::Amber,
+                ])
+        ->path('member')->brandLogo(asset('icons/lentera.svg'))
             ->discoverResources(in: app_path('Filament/Member/Resources'), for: 'App\Filament\Member\Resources')
             ->discoverPages(in: app_path('Filament/Member/Pages'), for: 'App\Filament\Member\Pages')
             ->pages([
@@ -39,7 +47,7 @@ class MemberPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Member/Widgets'), for: 'App\Filament\Member\Widgets')
             ->widgets([
-                \App\Filament\Member\Widgets\ItemCatalogWidget::class,
+
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -51,6 +59,8 @@ class MemberPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                // OnlyMember::class,
+
             ])
             ->authMiddleware([
                 Authenticate::class,

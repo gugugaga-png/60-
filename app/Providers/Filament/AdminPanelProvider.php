@@ -41,16 +41,16 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->sidebarCollapsibleOnDesktop(true)
+            ->sidebarFullyCollapsibleOnDesktop()
             ->login()
             ->colors([
                 'primary' => Color::Indigo,
             ])
-           
+            ->brandLogo(asset('icons/lentera.svg'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->pages([
                 Dashboard::class,
-              
+
                 MyBorrowings::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
@@ -77,6 +77,7 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
                 \App\Http\Middleware\RedirectBorrower::class,
+               
             ]);
     }
 }

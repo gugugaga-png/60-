@@ -10,10 +10,10 @@ class ListBorrowings extends ListRecords
 {
     protected static string $resource = BorrowingResource::class;
 
-    protected function getHeaderActions(): array
-    {
-        return [
-            CreateAction::make(),
-        ];
-    }
+    // protected function getHeaderActions(): array
+    // {
+    //     // return [
+    //     //     CreateAction::make(),
+    //     // ];
+    // }
 }
